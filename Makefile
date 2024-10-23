@@ -8,6 +8,8 @@ COMMIT := $(shell git describe --always)
 DATE := $(shell date -u +"%Y-%m-%d-%H:%M")
 BINARY := fiu-run-test
 
+FIO_PERCENT := 0.5
+
 all: clean build
 
 test:
@@ -23,5 +25,12 @@ build:
 		./${BINARY}.go
 
 run:
-	FIO_PERCENT=0.5
-	/usr/bin/fiu-run -x -c "enable_random name=posix/io/rw/read,probability=${FIO_PERCENT} name=posix/io/rw/write,probability=${FIO_PERCENT}" ./${BINARY}.go
+	/usr/bin/fiu-run -x -c "enable_random name=posix/io/rw/read,probability=${FIO_PERCENT} name=posix/io/rw/write,probability=${FIO_PERCENT}" ./${BINARY}
+
+run_read:
+	/usr/bin/fiu-run -x -c "enable_random name=posix/io/rw/read,probability=${FIO_PERCENT}" ./${BINARY}
+
+run_write:
+	/usr/bin/fiu-run -x -c "enable_random name=posix/io/rw/write,probability=${FIO_PERCENT}" ./${BINARY}
+
+#
