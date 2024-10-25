@@ -17,10 +17,11 @@ test:
 
 clean:
 	[ -f ${BINARY} ] && rm -rf ./${BINARY} || true
+	rm -rf *.bin
 
 build:
 	go build -ldflags \
-		"-X main.commit=${COMMIT} -X main.date=${DATE} -X main.date=${VERSION}" \
+		"-X main.commit=${COMMIT} -X main.date=${DATE} -X main.versions=${VERSION}" \
 		-o ./${BINARY} \
 		./${BINARY}.go
 
@@ -32,5 +33,8 @@ run_read:
 
 run_write:
 	/usr/bin/fiu-run -x -c "enable_random name=posix/io/rw/write,probability=${FIO_PERCENT}" ./${BINARY}
+
+capture_strace:
+	strace ./fiu-run-test >strace_2024_10_23 2>&1
 
 #
