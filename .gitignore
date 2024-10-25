@@ -1,1 +1,3 @@
 fiu-run-test
+*.bin
+#strace*

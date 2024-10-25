@@ -1,0 +1,25 @@
+{
+  "fault_injectors": [
+    {
+      "syscall_name": "read",
+
+      "error_list": [
+        {
+          "exit_code": "-ENOENT",
+          "probability": 10
+        }
+      ]
+    },
+
+    {
+      "syscall_name": "write",
+
+      "error_list": [
+        {
+          "exit_code": "-ENOENT",
+          "probability": 10
+        }
+      ]
+    }
+  ]
+}
