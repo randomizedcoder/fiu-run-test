@@ -1,0 +1,30 @@
+{
+  "fault_injectors": [
+    {
+      "syscall_name": "fchmodat",
+
+      "error_list": [
+        {
+          "exit_code": "-ENOENT",
+          "probability": 50
+        },
+
+        {
+          "exit_code": -100,
+          "probability": 30
+        }
+      ]
+    },
+
+    {
+      "syscall_name": "openat",
+
+      "error_list": [
+        {
+          "exit_code": "-ENOENT",
+          "probability": 50
+        }
+      ]
+    }
+  ]
+}
